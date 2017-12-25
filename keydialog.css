@@ -1,0 +1,206 @@
+
+:root {
+    --mainC: #333;
+    --emphasizeC: #FF8A00;
+    --warningC: #CC0000;
+    --normalC: #666;
+    --assistC: #999;
+    --disableC: #CCC;
+    --borderC: #EEE;
+    --assistBgC: #F9F9F9;
+    --emphasizeFS: 36px;
+    --largeFS: 24px;
+    --bigFS: 18px;
+    --normalFS: 16px;
+    --smallFS: 14px;
+    --tinyFS: 13px;
+    --miniFS: 12px;
+}
+
+/* 
+*   弹窗  
+*/
+
+.loading {
+    position: fixed;
+    top:0;
+    right: 0;
+    bottom:0;
+    left: 0;
+    .icon-loading{
+        width: 66px;
+        height: 46px;
+        padding-top: 16px;
+        background: #fff;
+        box-shadow: 0 0 2px 0 #555;
+        border-radius: 10px;
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        font-size: 30px;
+        &:before, &:after{
+            top: 14px;
+            left:-16px;
+        }
+    }
+}
+
+.kdialog{
+    opacity:0;
+    transition-duration:.2s;
+    &.fadeIn{opacity:1;
+        .kdialog_box{
+            transition-delay: .1s;
+            transform:translate(-50%, -50%) scale(1,1);
+            transition-timing-function:cubic-bezier(0.47, 2.02, 0.31, -0.3);
+        }
+    }
+    &.modal_toast{opacity:1;
+        transition-duration: 0s;
+    }
+}
+
+.modal-enter-active, .modal-leave-active {
+  transition: opacity .3s ease, transform .3s linear;
+}
+.modal-leave-active {
+    opacity: 0;
+    transform:scale(0,0);
+}
+
+.kdialog, .kdialog_bg{
+    position: fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index:100;
+}
+
+.kdialog_bg{
+    background: rgba(0, 0, 0, .5);
+    &.toast_bg{background:none;}
+}
+
+.kdialog_box, .kdialog_toast{
+    position: absolute;
+    top:50%; left:50%;
+    z-index: 101;
+    border-radius: 4px;
+}
+
+.kdialog_box{
+    min-width: 560px;
+    background:#fff;
+    transition-duration: .3s;
+    transform:translate(-50%, -50%) scale(0, 0);
+}
+
+.kdialog_header{
+    font-size: var(--bigFS);
+    font-family: 'OpenSans-Bold';
+    color: var(--mainC);
+    border-bottom:1px solid var(--borderC);
+    padding: 15px 30px 0;
+    height: 40px;
+    line-height:40px;
+    position:relative;
+}
+
+.kdialog_title{margin:0;}
+
+.kdialog_toast{
+    text-align: center;
+    font-size: var(--bigFS);
+    line-height: 64px;
+    transform: translate(-50%, -50%);
+}
+
+.kdialog_msg{
+    color: #fff;
+    padding:0 30px;
+    border-radius: 4px;
+    display: inline-block;
+    background: rgba(0,0,0,.8);
+    transform: perspective(1px) translateZ(0);
+    transition-duration:.5s;
+}
+
+.kdialog_close{
+    position: absolute;
+    right:5px;top:5px;
+    width: 30px;
+    height:30px;
+    cursor:pointer;
+    transition-duration:.3s;
+    &:hover{
+        transform: rotate(180deg);
+    }
+    &:before, &:after{
+        content: '';
+        height:2px;
+        width:20px;
+        position:absolute;
+        background: var(--mainC);
+        border-radius:2px;
+        top:14px;right:5px;
+    }
+    &:before{
+        transform: rotate(45deg);
+    }
+    &:after{
+        transform: rotate(-45deg);
+    }
+}
+
+.kdialog_content{
+    padding:30px 30px 0;
+    font-size: var(--tinyFS);
+    max-height: 500px;
+}
+
+.kdialog_footer{
+    padding:10px 30px 30px;
+    text-align: center;
+    font-size: 0;
+    a{display: inline-block;
+        vertical-align:top;
+        font-size: var(--bigFS);
+        width: 154px;
+        height: 40px;
+        line-height: 40px;
+        background: var(--emphasizeC);
+        border-radius: 4px;
+        margin:0 10px;
+        color: #fff;
+        &:hover{
+            background-color: #e67c00;
+            text-decoration: none;
+        }
+    }
+    .cancel{
+        background: var(--disableC);
+        &:hover{background:#bfbfbf;}
+    }
+}
+
+@keyframes progress{
+    from  { background-position: 0 0; }
+    to    { background-position: 60px 0; }
+}
+
+.confirm{
+    &.submiting{
+        animation: progress 2s linear infinite;
+        background-color: var(--emphasizeC) !important;
+        background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent) !important;
+        background-size: 60px 60px !important;
+    }
+    &.disabled{background-color: var(--disableC) !important;}
+}
+
+.bouncein{
+    transform: scale(1.05);
+    transition-timing-function:cubic-bezier(0.47, 2.02, 0.31, -0.3);
+}

@@ -1,0 +1,26 @@
+{
+  "presets": [
+    ["env", {
+      "target": {
+        "browsers": ["last 2 versions", "ie >=9"]
+      },
+      "modules": false,
+      "useBuildIns": true
+    }]
+  ],
+  "plugins": [
+    "transform-class-properties",
+    "syntax-dynamic-import",
+    "transform-object-rest-spread",
+    "transform-async-to-generator",
+    "transform-regenerator",
+    "transform-runtime"
+  ],
+  "ignore":[
+      "jquery.js",
+      "jquery.min.js",
+      "bootstrap.js",
+      "bootstrap.min.js"
+  ],
+  "comments": false
+}
