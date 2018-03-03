@@ -6,7 +6,6 @@ run.bat
 npm-debug.log
 dist/favicon.ico
 npm-debug.log.*
-dist/
 .idea/
 npm-debug.log
 selenium-debug.log

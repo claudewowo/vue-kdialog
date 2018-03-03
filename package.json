@@ -1,13 +1,27 @@
 {
   "name": "vue-kdialog",
-  "version": "0.0.1",
+  "version": "0.7.7",
   "description": "A Vue dialog component",
   "author": "keydone <k754708625@gmail.com>",
+  "main": "dist/keydialog.js",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"
   },
-  "dependencies": {
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keydone/vue-kdialog.git"
+  },
+  "keywords": [
+    "vue",
+    "vue-kdialog",
+    "component"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/keydone/vue-kdialog/issues"
+  },
+  "devDependencies": {
     "autoprefixer": "^7.2.3",
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",

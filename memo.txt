@@ -1,0 +1,11 @@
+npm 发布流程：
+
+npm init (name, main入口)
+
+main入口 export default {}
+
+npm login
+
+npm version major/minor/patch
+
+npm publish

@@ -1,49 +1,19 @@
 
-:root {
-    --mainC: #333;
-    --emphasizeC: #FF8A00;
-    --warningC: #CC0000;
-    --normalC: #666;
-    --assistC: #999;
-    --disableC: #CCC;
-    --borderC: #EEE;
-    --assistBgC: #F9F9F9;
-    --emphasizeFS: 36px;
-    --largeFS: 24px;
-    --bigFS: 18px;
-    --normalFS: 16px;
-    --smallFS: 14px;
-    --tinyFS: 13px;
-    --miniFS: 12px;
-}
-
 /* 
 *   弹窗  
 */
 
-.loading {
+.kdialog, .kdialog_bg{
     position: fixed;
     top:0;
-    right: 0;
+    left:0;
     bottom:0;
-    left: 0;
-    .icon-loading{
-        width: 66px;
-        height: 46px;
-        padding-top: 16px;
-        background: #fff;
-        box-shadow: 0 0 2px 0 #555;
-        border-radius: 10px;
-        position: absolute;
-        top:50%;
-        left:50%;
-        transform: translate(-50%, -50%);
-        font-size: 30px;
-        &:before, &:after{
-            top: 14px;
-            left:-16px;
-        }
-    }
+    right:0;
+    z-index:10;
+}
+
+@keyframes spin {
+    100%{ transform: rotate(360deg); transform: rotate(360deg); }
 }
 
 .kdialog{
@@ -59,6 +29,17 @@
     &.modal_toast{opacity:1;
         transition-duration: 0s;
     }
+    .icon-loading {
+      width: 66px;
+      height:66px;
+      background: #fff;
+      box-shadow: 0 0 2px 0 #555;
+      border-radius: 10px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 }
 
 .modal-enter-active, .modal-leave-active {
@@ -69,13 +50,19 @@
     transform:scale(0,0);
 }
 
-.kdialog, .kdialog_bg{
-    position: fixed;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    z-index:100;
+.kdialog {
+    .icon-loading:before{
+        content:'';
+        width: 26px;
+        height: 26px;
+        display:block;
+        margin:18px auto;
+        border-radius: 50%;
+        border: 3px solid rgb(0,0,0);
+        border-left-color: transparent;
+        border-right-color: transparent;
+        animation: spin 575ms infinite linear;
+    }
 }
 
 .kdialog_bg{
@@ -98,10 +85,10 @@
 }
 
 .kdialog_header{
-    font-size: var(--bigFS);
+    font-size: 18px;
     font-family: 'OpenSans-Bold';
-    color: var(--mainC);
-    border-bottom:1px solid var(--borderC);
+    color: #333;
+    border-bottom:1px solid #eee;
     padding: 15px 30px 0;
     height: 40px;
     line-height:40px;
@@ -112,7 +99,7 @@
 
 .kdialog_toast{
     text-align: center;
-    font-size: var(--bigFS);
+    font-size: 18px;
     line-height: 64px;
     transform: translate(-50%, -50%);
 }
@@ -142,7 +129,7 @@
         height:2px;
         width:20px;
         position:absolute;
-        background: var(--mainC);
+        background: #333;
         border-radius:2px;
         top:14px;right:5px;
     }
@@ -156,7 +143,7 @@
 
 .kdialog_content{
     padding:30px 30px 0;
-    font-size: var(--tinyFS);
+    font-size: 13px;
     max-height: 500px;
 }
 
@@ -166,21 +153,21 @@
     font-size: 0;
     a{display: inline-block;
         vertical-align:top;
-        font-size: var(--bigFS);
+        font-size: 18px;
         width: 154px;
         height: 40px;
         line-height: 40px;
-        background: var(--emphasizeC);
+        background: #FF8A00;
         border-radius: 4px;
         margin:0 10px;
         color: #fff;
+        text-decoration: none;
         &:hover{
             background-color: #e67c00;
-            text-decoration: none;
         }
     }
     .cancel{
-        background: var(--disableC);
+        background: #CCC;
         &:hover{background:#bfbfbf;}
     }
 }
@@ -193,11 +180,13 @@
 .confirm{
     &.submiting{
         animation: progress 2s linear infinite;
-        background-color: var(--emphasizeC) !important;
+        background-color: #FF8A00 !important;
         background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent) !important;
         background-size: 60px 60px !important;
     }
-    &.disabled{background-color: var(--disableC) !important;}
+    &.disabled{cursor: not-allowed;
+        background-color: #CCC !important;
+    }
 }
 
 .bouncein{

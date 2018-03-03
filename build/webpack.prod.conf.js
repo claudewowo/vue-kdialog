@@ -38,14 +38,22 @@ const webpackConfig = merge(baseWebpackConfig, {
                 fallback: 'vue-style-loader',
                 use: ['css-loader?importLoaders=1', 'postcss-loader', 'less-loader']    //'stylus-loader','stylus-loader'
             })
-        }]
+        },{
+            test: /\.css$/,
+            use: ['style-loader', {
+                loader: 'css-loader',
+                options: {
+                    importLoaders: 1,
+                },
+            }, 'postcss-loader'],
+        },]
     },
     //开发工具，使用 eval 过的 souremap 开发时速度更快
     devtool: config.build.productionSourceMap ? '#source-map':false,
     output: {
         path: config.build.assetsRoot,
-        filename: utils.assetsPath('js/[name].js'),     //[name].[chunkhash]
-        chunkFilename: utils.assetsPath('js/[id].js')   //[id].[chunkhash]
+        filename: utils.assetsPath('[name].js'),     //[name].[chunkhash]
+        chunkFilename: utils.assetsPath('[id].js')   //[id].[chunkhash]
     },
     //参见 http://vue-loader.vuejs.org/en/workflow/production.html
     plugins: [
@@ -73,7 +81,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         }),
         // 将css文件打包成独立文件
         new ExtractTextPlugin({
-            filename: utils.assetsPath('css/[name].css'),   //[name].[contenthash:5]
+            filename: utils.assetsPath('[name].css'),   //[name].[contenthash:5]
             allChunks: true
         }),
         // 压缩 css
@@ -82,7 +90,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         }),
         // 将公共模块打包到公共文件 vendor 中
         //minChunks的值决定有多少个entry文件调用了相同模块，才打包进公共文件中
-        new webpack.optimize.CommonsChunkPlugin({
+        /*new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks:2
             /*minChunks: function (module) {
@@ -90,8 +98,8 @@ const webpackConfig = merge(baseWebpackConfig, {
                 return (
                     module.resource && /\.js$/.test(module.resource) && module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0
                 )
-            }*/
-        }),
+            }
+        }),*/
         /*new webpack.optimize.CommonsChunkPlugin({
             name: 'iconfont',
             minChunks: function (module) {
@@ -101,14 +109,14 @@ const webpackConfig = merge(baseWebpackConfig, {
             }
         }),*/
         // 提取 webpack runtime 和 module manifest 到独立的文件，以避免在 bundle 更新后 vendor hash 被更新
-        new webpack.optimize.CommonsChunkPlugin({
+        /*new webpack.optimize.CommonsChunkPlugin({
             name: 'manifest',
             chunks: ['vendor']
-        })
+        })*/
     ]
 })
 
-for (let page in entries) {
+/*for (let page in entries) {
     let fileName = page.split('/')[1] === 'home' ? 'index' + '.html' : page.split('/')[1] + '.html',
     plugin = new HtmlWebpackPlugin({
         filename: fileName,
@@ -131,7 +139,7 @@ for (let page in entries) {
         chunksSortMode: 'dependency'
     });
     webpackConfig.plugins.push(plugin)
-}
+}*/
 
 //gzip 压缩
 if (config.build.productionGzip) {

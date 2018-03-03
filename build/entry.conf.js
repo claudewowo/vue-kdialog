@@ -3,8 +3,8 @@ const path = require('path'),
     
 
 let globPath = {
-    js: './examples/*.js',
-    html: './examples/*.html'
+    js: './src/**/*.js',
+    html: './src/**/*.html'
 }
 
 // vue 多页面入口

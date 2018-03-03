@@ -3,8 +3,8 @@
  */
 
 import Vue from 'vue';
-import App from './app.vue';
-import KeyDialog from '../keydialog';
+import App from './examples.vue';
+import KeyDialog from './keydialog';
 
 Vue.use(KeyDialog);
 
