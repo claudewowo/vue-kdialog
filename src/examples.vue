@@ -12,29 +12,21 @@
 </template>
 
 <script>
+
 	export default {
-		data () {
-			return {
-				
-			}
-		},
-		components: {
-			
-		},
 		methods: {
 			toast(){
-				this.$toast({msg:'This is a toast'});
+				this.$toast({msg: 'This is a toast'});
 			},
 			alert(){
-				this.$alert({content:'This is a alert'});
+				this.$alert({content: 'This is a alert'});
 			},
 			confirm(){
-				this.$confirm({content:'This is a confirm'});
+				this.$confirm({content: 'This is a confirm'});
 			},
 			loading(){
 				this.$loading();
 			},
-
 		}
 	}
 </script>

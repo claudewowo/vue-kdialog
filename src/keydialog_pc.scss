@@ -71,10 +71,10 @@
 }
 
 .kdialog_box, .kdialog_toast{
+    border-radius: 4px;
     position: absolute;
     top:50%; left:50%;
     z-index: 101;
-    border-radius: 4px;
 }
 
 .kdialog_box{
@@ -85,9 +85,9 @@
 }
 
 .kdialog_header{
+    color: #333;
     font-size: 18px;
     font-family: 'OpenSans-Bold';
-    color: #333;
     border-bottom:1px solid #eee;
     padding: 15px 30px 0;
     height: 40px;
@@ -100,13 +100,13 @@
 .kdialog_toast{
     text-align: center;
     font-size: 18px;
-    line-height: 64px;
+    line-height: 30px;
     transform: translate(-50%, -50%);
 }
 
 .kdialog_msg{
     color: #fff;
-    padding:0 30px;
+    padding:20px;
     border-radius: 4px;
     display: inline-block;
     background: rgba(0,0,0,.8);
@@ -121,9 +121,7 @@
     height:30px;
     cursor:pointer;
     transition-duration:.3s;
-    &:hover{
-        transform: rotate(180deg);
-    }
+    &:hover{transform: rotate(180deg);}
     &:before, &:after{
         content: '';
         height:2px;
@@ -133,12 +131,8 @@
         border-radius:2px;
         top:14px;right:5px;
     }
-    &:before{
-        transform: rotate(45deg);
-    }
-    &:after{
-        transform: rotate(-45deg);
-    }
+    &:before{transform: rotate(45deg);}
+    &:after{transform: rotate(-45deg);}
 }
 
 .kdialog_content{
@@ -159,12 +153,11 @@
         line-height: 40px;
         background: #FF8A00;
         border-radius: 4px;
+        padding:0 10px;
         margin:0 10px;
         color: #fff;
         text-decoration: none;
-        &:hover{
-            background-color: #e67c00;
-        }
+        &:hover{background-color: #e67c00;}
     }
     .cancel{
         background: #CCC;
@@ -185,11 +178,11 @@
         background-size: 60px 60px !important;
     }
     &.disabled{cursor: not-allowed;
-        background-color: #CCC !important;
+        background: #CCC !important;
     }
 }
 
 .bouncein{
-    transform: scale(1.05);
+    transform: scale(1.03);
     transition-timing-function:cubic-bezier(0.47, 2.02, 0.31, -0.3);
 }

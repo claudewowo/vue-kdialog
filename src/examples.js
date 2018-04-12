@@ -4,7 +4,8 @@
 
 import Vue from 'vue';
 import App from './examples.vue';
-import KeyDialog from './keydialog';
+import KeyDialog from './keydialog.js';
+import './keydialog_pc.css';
 
 Vue.use(KeyDialog);
 
