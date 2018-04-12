@@ -175,6 +175,10 @@ vm.$alert({
 
 2, 如果使用 webpack.optimize.uglifyjsplugin 打包过程中出现弹窗组件打包报错， 请换成 uglifyjs-webpack-plugin 去压缩你的 JS 文件， 应该就不会报错了。
 
+## API document (开发文档)
+
+https://keydone.github.io/vue-kdialog/dist/examples.html
+
 ##0.7.11 new:
 * remove 'stopBodyScroll' when _runtime == 'm';
 stop click event after tap;
