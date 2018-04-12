@@ -39,7 +39,7 @@
                     eTime:'',
                 },
                 show: true,                             // 显示/隐藏弹窗
-                showlock: false,                        // 弹窗显示状态锁
+                showlock: true,                         // 弹窗显示状态锁
                 stopBodyScroll:true,                    // 禁止body跟随窗口滚动
                 rollfrom:'',                            // 弹窗唤起方向 class
                 customClass:'',                         // 弹窗自定义 class
@@ -138,19 +138,15 @@
                 const dialogs = document.querySelectorAll('.kdialog').length;
                 if(vm.stopBodyScroll && dialogs<=1){
                     setTimeout(() => {
-                        // 还原 position/top/scrolltop
-			vm.body.el.style.left = vm.body.el.originLeft;
-                        vm.body.el.style.right = vm.body.el.originRight;
-                        vm.body.el.style.position = vm.body.el.originPosition;
-                        vm.body.el.style.top = vm.body.el.originTop;
-                        window.scrollTo(0, vm.body.el.originScrollTop);
-                        
+
                         if(vm._runtime === 'runon_pc'){
+                            // 还原 overflow
+                            vm.body.el.style.overflow = '';
                             vm.body.el.style.marginRight = vm.body.el.originMarginRight;
                         }
                         
                         // 移除body上设置的属性
-                        vm.body.el.originTop = undefined;
+                        vm.body.el.scrollbar = false;
                     });
                 }
             }
@@ -159,30 +155,19 @@
             const vm = this;
             const doc = document;
             vm.body.el = doc.documentElement;
-            if(vm.stopBodyScroll && vm.body.el.originTop === undefined){
+            if(vm.stopBodyScroll && !vm.body.el.scrollbar){
                 const win = window;
                 if(vm._runtime === 'runon_pc'){
                     vm.body.el.originMarginRight = vm.body.el.style.marginRight;
                     vm.body.el.scrollbarWidth = win.innerWidth - doc.body.clientWidth; // 滚动条宽度
                     vm.body.el.style.marginRight = (vm.body.el.originMarginRight + vm.body.el.scrollbarWidth) + 'px';
+                    vm.body.el.style.overflow = 'hidden';
                 }
-                // 获取原始数据
-		vm.body.el.originLeft = vm.body.el.style.left;
-		vm.body.el.originRight = vm.body.el.style.right;
-                vm.body.el.originTop = vm.body.el.style.top;
-		vm.body.el.style.left = vm.body.el.originLeft || 0;
-		vm.body.el.style.right = vm.body.el.originRight || 0 ;
-                vm.body.el.originScrollTop = win.scrollY;
-                vm.body.el.originPosition = vm.body.el.style.position;
-                // 设置 position/top/scrolltop
-                vm.body.el.style.position = 'fixed';
-                vm.body.scrollTop = vm.body.el.originTop || vm.body.el.originScrollTop;
-                vm.body.el.style.top = -vm.body.scrollTop + 'px';
+                vm.body.el.scrollbar = true;
             };
             
             vm.rollfrom = 'from'+ (vm.rollfrom || 'center');
-            // 弹窗动画加载期间防止被点击
-            vm.showlock = true;
+
             if(vm._type === 'toast'){
                 /* toast 弹窗 */
                 if(vm.timer < 500) vm.timer = 500;
@@ -191,11 +176,13 @@
                 }, 66);
                 setTimeout(() => {
                     vm.toast_animation_name = '';
-                    vm.showlock = false;
+		    vm.showlock = false;
+                    // 允许body滚动
+                    vm.bodyScroll();
                 }, vm.timer-300);
                 setTimeout(() => {
                     if(vm.ok){
-                        return vm.ok();
+                        return vm.ok(vm);
                     }
                     vm.show = false;
                     // 允许body滚动
@@ -208,7 +195,7 @@
                 // 300ms 后允许点击
                 setTimeout(()=>{
                     vm.showlock = false;
-                },300);
+                },400);
             }
         }
     }

@@ -4,7 +4,7 @@
 
 import Vue from 'vue';
 import KeyDialog from './keydialog.vue';
-// import './keydialog.css';
+// import './keydialog_pc.css';
 
 const KeyDialogConstructor = Vue.extend(KeyDialog);
 

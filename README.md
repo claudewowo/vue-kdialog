@@ -136,7 +136,7 @@ kdialog.eventbus();
 const this = vm;
 vm.$confirm({
 	title: '<h2>title with html</h2>'
-	okEvent: 'changeAct',		// emit ok event, click the ok, it will emit 'changeAct'
+	okEvent: 'changeAct',  // emit ok event, click the ok, it will emit 'changeAct'
 	cancelEvent: 'cancelChangeAct',	// emit cancel event, click the ok, it will emit 'changeAct'
 	componentData: {
 		data:'something'
@@ -144,7 +144,7 @@ vm.$confirm({
 });
 
 vm.$bus.$on('changeAct', (data)=>{
-	console.log(data); 	 	 	 // the dialog object
+	console.log(data);  // the dialog object
 	console.log(data.$dialog.componentData); // {data:'something'}
 	data.$dialog.close();
 	//after close, the dialog, 'changeAct' & 'cancelChangeAct' events will be destroyed automatically, so please use different event name for every different dialog. 
@@ -160,8 +160,8 @@ vm.$bus.$off('event name', (data)=>{});
 ```javascript
 vm.$alert({
 	title: 'gift'
-	ok($dialog){			// ok callback
-		console.log($dialog);	// the $alert dialog itself;
+	ok($dialog){  // ok callback
+		console.log($dialog); // the $alert dialog itself;
 	},
 });
 ```
@@ -174,6 +174,10 @@ vm.$alert({
 2, When building, getting error with webpack.optimize.uglifyjsplugin config, Using uglifyjs-webpack-plugin to instead of webpack.optimize.uglifyjsplugin, it should be fine.
 
 2, 如果使用 webpack.optimize.uglifyjsplugin 打包过程中出现弹窗组件打包报错， 请换成 uglifyjs-webpack-plugin 去压缩你的 JS 文件， 应该就不会报错了。
+
+##0.7.11 new:
+* remove 'stopBodyScroll' when _runtime == 'm';
+stop click event after tap;
 
 ##0.7.6 new:
 toast can be html now!
@@ -197,19 +201,6 @@ add "rollfrom" to control the position of the dialog from 'top/right/bottom/left
 
 ##0.6.3
 kdialog.setRunTime('m'); // set your runtime, default value: 'pc'
-
-##0.6.0
-confirmText => okText
-
-add a customClass param for u
-
-now title can be html!
-
-##0.5.2
-type => _type (don't override the _type)
-
-## 0.5.1 new (新增)
-* shadowClose: click the background of dialog to close dialog (新增点击遮罩可以关闭弹窗)
 
 > To be continued !  ( It will be strong )
 

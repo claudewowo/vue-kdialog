@@ -2,7 +2,7 @@
   "presets": [
     ["env", {
       "target": {
-        "browsers": ["last 2 versions", "ie >=9"]
+           "browsers": ["last 20 versions", "ie >=9"]
       },
       "modules": false,
       "useBuildIns": true
