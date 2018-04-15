@@ -85,7 +85,7 @@ customClass | String | custom className for dialog (弹窗自定义className) |
 _type | reserved words(不要覆盖) | don't override it (内部组件使用，请勿覆盖)|
 _runtime | reserved words (default : 'pc' 不要覆盖) | kdialog.setRunTime('m'); (用于判断运行环境进行样式自定义，例如pc/m)|
 title    | String| title of dialog (弹窗标题) |
-width    | Number/String (no unit) | width of dialog (弹窗宽度) |
+width    | Number/String (width unit) | width of dialog (弹窗宽度) |
 content  | String | content of dialog (弹窗内容) |
 ok  | function | callback for ok botton/toast (确定按钮/toast回调) |
 cancel  | function | callback for cancel button (取消按钮回调) |
@@ -94,7 +94,7 @@ okEvent | Object | custom ok event bus name (自定义确定 event bus 名称) |
 cancelEvent | Object | custom cancel event bus name (自定义取消 event bus 名称) |
 disabled | Boolen | disable click the confirm (禁用确认按钮点击事件) |
 submiting | Boolen | submiting style for confirm button (确认按钮正在提交样式) |
-shadowClose | Boolen | click shadow to close dialog (点击背景遮罩关闭弹窗) |
+shadowClose | Boolen (default : true) | click shadow to close dialog (点击背景遮罩关闭弹窗) |
 toastName | String (default : 'bouncein') | custom className for toast (toast弹窗自定义动画class) |
 modalName | String (default : 'fadeIn') | custom transition className for dalog (弹窗自定义过渡动画class) |
 okText  | String | confirm button text (确认按钮文案) |
@@ -175,6 +175,14 @@ vm.$alert({
 
 2, 如果使用 webpack.optimize.uglifyjsplugin 打包过程中出现弹窗组件打包报错， 请换成 uglifyjs-webpack-plugin 去压缩你的 JS 文件， 应该就不会报错了。
 
+# API document (开发文档)
+
+https://keydone.github.io/vue-kdialog/dist/examples.html
+
+##0.7.12 new:
+* remove toastName, modalName
+Add 'modal_enter', 'modal_leave' for animation;
+
 ##0.7.11 new:
 * remove 'stopBodyScroll' when _runtime == 'm';
 stop click event after tap;
@@ -188,19 +196,6 @@ toast can be html now!
 ##0.7.0 new:
 * stopBodyScroll: to stop body's scroll action while scrolling dialog content when _runtime == 'm'; (kdialog.setRunTime('m') 时滚动弹窗内容阻止body滚动)
 
-##0.6.4
-fix some bugs:
-
-toastName, modalName can be replace;
-
-shadowClose is fine;
-
-new:
-
-add "rollfrom" to control the position of the dialog from 'top/right/bottom/left', default: 'center';
-
-##0.6.3
-kdialog.setRunTime('m'); // set your runtime, default value: 'pc'
 
 > To be continued !  ( It will be strong )
 

@@ -29,6 +29,28 @@ webpackBaseConfig.plugins.push(
         },
         chunksSortMode: 'dependency',
     }),
+    new HtmlWebpackPlugin({
+        filename: '../loading.html',
+        template: path.join(__dirname, '../src/examples.html'),
+        chunks: ['examples', 'vendor', 'manifest'],
+        inject: true, // 允许插件修改哪些内容，包括head与body
+        minify: {
+            removeComments: true, // 移除HTML中的注释
+            removeEmptyAttributes: true,
+        },
+        chunksSortMode: 'dependency',
+    }),
+    new HtmlWebpackPlugin({
+        filename: '../alert.html',
+        template: path.join(__dirname, '../src/examples.html'),
+        chunks: ['examples', 'vendor', 'manifest'],
+        inject: true, // 允许插件修改哪些内容，包括head与body
+        minify: {
+            removeComments: true, // 移除HTML中的注释
+            removeEmptyAttributes: true,
+        },
+        chunksSortMode: 'dependency',
+    }),
     new webpack.DefinePlugin({
         'process.env': {
             NODE_ENV: JSON.stringify('development'),
