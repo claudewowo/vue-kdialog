@@ -7,7 +7,7 @@ const CleanPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const webpackConfig = require('./config');
+const webpackConfig = require('./webpack.base.config');
 
 const params = process.env.npm_lifecycle_script.split(' ')[2];
 
@@ -68,6 +68,32 @@ if (params !== '--0') {
 
 webpackConfig.plugins.push(new HtmlWebpackPlugin({
     filename: '../dist/examples.html', // 输出路径及文件名
+    template: path.join(__dirname, '../src/examples.html'), // 引入 html 模版路径
+    chunks: ['examples', 'vendor', 'manifest'],
+    inject: true, // 允许插件修改哪些内容，包括head与body
+    // hash: true, // 为静态资源生成hash值，可以实现缓存
+    minify: {
+        removeComments: true, // 移除HTML中的注释
+        collapseWhitespace: true,
+        removeEmptyAttributes: true,
+    },
+    chunksSortMode: 'dependency',
+}));
+webpackConfig.plugins.push(new HtmlWebpackPlugin({
+    filename: '../dist/loading.html', // 输出路径及文件名
+    template: path.join(__dirname, '../src/examples.html'), // 引入 html 模版路径
+    chunks: ['examples', 'vendor', 'manifest'],
+    inject: true, // 允许插件修改哪些内容，包括head与body
+    // hash: true, // 为静态资源生成hash值，可以实现缓存
+    minify: {
+        removeComments: true, // 移除HTML中的注释
+        collapseWhitespace: true,
+        removeEmptyAttributes: true,
+    },
+    chunksSortMode: 'dependency',
+}));
+webpackConfig.plugins.push(new HtmlWebpackPlugin({
+    filename: '../dist/alert.html', // 输出路径及文件名
     template: path.join(__dirname, '../src/examples.html'), // 引入 html 模版路径
     chunks: ['examples', 'vendor', 'manifest'],
     inject: true, // 允许插件修改哪些内容，包括head与body

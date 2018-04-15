@@ -1,26 +1,27 @@
 <template lang="pug">
-    .kdialog(v-if="show", :id="id", :class="[this._type === 'loading' ? 'loading': ('modal_'+ _type), _runtime, customClass, modal_animation_name, rollfrom]")
+    .kdialog(v-if="show", :id="id", :class="[this._type === 'loading' ? 'loading': ('modal_'+ _type), _runtime, customClass, modal_enter, modal_leave, rollfrom]")
         //- loading
         i.icon-loading(v-if="_type=='loading'")
         //- shadow
-        .kdialog_bg(v-else, :class="_type === 'toast'?'toast_bg':''", @click="shadowHide", v-on:touchstart="touchStart", v-on:touchend="touchEnd($event, 2)")
-        //- toast
-        .kdialog_toast(v-if="_type === 'toast'")
-            p.kdialog_msg(:class="toast_animation_name", v-html="msg")
-        //- content box
-        .kdialog_box(v-if="_type!='toast' && _type!='loading'", :style="width?('width:'+ width +'px;min-width:auto;'):''")
-            //- header
-            .kdialog_header(v-if="title")
-                h3.kdialog_title(v-html="title")
-            i.kdialog_close(@click="closePop", v-on:touchstart="touchStart", v-on:touchend="touchEnd")
-            //- content
-            .kdialog_content(v-if="component")
-                component(:is="component")
-            .kdialog_content(v-else, v-html="content")
-            //- footer
-            .kdialog_footer(:class="_type + '_footer'")
-                a.confirm(href="javascript:;", @click="confirmPop", v-on:touchstart="touchStart", v-on:touchend="touchEnd($event, 1)", :class="disabled?'disabled':(submiting?'submiting':'')") {{okText || "Confirm"}}
-                a.cancel(href="javascript:;", @click="closePop", v-on:touchstart="touchStart", v-on:touchend="touchEnd", v-if="_type === 'confirm'") {{cancelText || "Cancel"}}
+        .kdialog_bg(v-else, @click="shadowHide", v-on:touchstart="touchStart", v-on:touchend="touchEnd($event, 2)")
+
+        .kdialog_wrap(v-if="_type!='loading'", :style="width?(`width:${ width };min-width:auto;`):''")
+            //- toast
+            .kdialog_msg(v-if="_type === 'toast'", v-html="msg")
+            //- content box
+            .kdialog_box(v-else)
+                //- header
+                .kdialog_header(v-if="title")
+                    .kdialog_title(v-html="title")
+                i.kdialog_close(@click="closePop", v-on:touchstart="touchStart", v-on:touchend="touchEnd")
+                //- content
+                .kdialog_content(v-if="component")
+                    component(:is="component")
+                .kdialog_content(v-else, v-html="content")
+                //- footer
+                .kdialog_footer(:class="_type + '_footer'")
+                    a.confirm(href="javascript:;", @click="confirmPop", v-on:touchstart="touchStart", v-on:touchend="touchEnd($event, 1)", :class="disabled?'disabled':(submiting?'submiting':'')") {{okText || "Confirm"}}
+                    a.cancel(href="javascript:;", @click="closePop", v-on:touchstart="touchStart", v-on:touchend="touchEnd", v-if="_type === 'confirm'") {{cancelText || "Cancel"}}
 
 </template>
 
@@ -41,12 +42,12 @@
                 show: true,                             // 显示/隐藏弹窗
                 showlock: true,                         // 弹窗显示状态锁
                 stopBodyScroll:true,                    // 禁止body跟随窗口滚动
-                rollfrom:'',                            // 弹窗唤起方向 class
                 customClass:'',                         // 弹窗自定义 class
-                _runtime: '',                           // 弹窗运行环境： 'pc/m'
+                rollfrom:'',                            // 弹窗唤起方向 class
+                _runtime:'',                            // 弹窗运行环境： 'pc/m'
                 _type: '',                              // 弹窗默认类型： confirm/alert/toast/loading
+                width: '',                              // 弹窗宽度(width uint)
                 title:'',                               // 弹窗标题
-                width: '',                              // 弹窗宽度
                 content:'',                             // 弹窗内容
                 ok: null,                               // 确定回调
                 cancel:null,                            // 取消回调
@@ -55,12 +56,11 @@
                 cancelEvent: '',                        // 取消按钮event事件
                 disabled: false,                        // confirm 按钮是否可点击
                 submiting:false,                        // 正在提交？
-                shadowClose:false,                      // 点击遮罩是否可关闭弹窗
-                toast_animation_name: '',               // toast动画 class
-                modal_animation_name: '',               // 弹窗过渡 class
+                shadowClose: true,                      // 点击遮罩是否可关闭弹窗
+                modal_enter: '',                        // 入场动画 class
+                modal_leave: '',                        // 离场动画 class
                 okText: '',                             // 确认按钮文案
                 cancelText: '',                         // 取消按钮文案
-                toastCall:null,                         // toast 消失后的回调
                 timer: 2500,                            // toast 默认显示时长
                 msg: '',                                // toast 弹窗信息
             }
@@ -112,30 +112,27 @@
             close(){
                 // 关闭弹窗
                 const vm = this;
-                vm.modal_animation_name = '';
+                vm.modal_enter = '';
+                vm.modal_leave = 'modal_leave';
                 
                 setTimeout(() => {
+                    const dialogs = document.querySelectorAll('.kdialog').length;
                     vm.show = false;
                     setTimeout(()=>{
                         // 允许body滚动
-                        vm.bodyScroll();
-                        // ok event
-                        if(vm.$bus && vm.okEvent){
-                            return vm.$bus.$off(vm.okEvent);
-                        }
+                        vm.bodyScroll(dialogs);
+                        /* // ok event
+                        vm.$bus.$off(vm.okEvent);
                         // cancel event
-                        if(vm.$bus && vm.cancelEvent){
-                            return vm.$bus.$off(vm.cancelEvent);
-                        }
+                        vm.$bus.$off(vm.cancelEvent); */
                         
                         vm.$destroy();
                     });
                 }, 200);
             },
             // 取消body禁止滚动
-            bodyScroll(){
+            bodyScroll(dialogs){
                 const vm = this;
-                const dialogs = document.querySelectorAll('.kdialog').length;
                 if(vm.stopBodyScroll && dialogs<=1){
                     setTimeout(() => {
 
@@ -168,31 +165,30 @@
             
             vm.rollfrom = 'from'+ (vm.rollfrom || 'center');
 
+            vm.modal_enter = vm.modal_leave = '';
+            setTimeout(() => {
+                vm.modal_enter = 'modal_enter';
+            }, 66);
+
             if(vm._type === 'toast'){
                 /* toast 弹窗 */
                 if(vm.timer < 500) vm.timer = 500;
                 setTimeout(() => {
-                    vm.toast_animation_name = vm.toastName || 'bouncein';
-                }, 66);
-                setTimeout(() => {
-                    vm.toast_animation_name = '';
-		    vm.showlock = false;
-                    // 允许body滚动
-                    vm.bodyScroll();
-                }, vm.timer-300);
+                    vm.modal_enter = '';
+                    vm.modal_leave = 'modal_leave';
+		            vm.showlock = false;
+                }, vm.timer-200);
                 setTimeout(() => {
                     if(vm.ok){
                         return vm.ok(vm);
                     }
-                    vm.show = false;
+                    const dialogs = doc.querySelectorAll('.kdialog').length;
                     // 允许body滚动
-                    vm.bodyScroll();
+                    vm.bodyScroll(dialogs);
+                    vm.show = false;
                 }, vm.timer);
             }else{
-                setTimeout(() => {
-                    vm.modal_animation_name = vm.modalName || 'fadeIn';
-                }, 66);
-                // 300ms 后允许点击
+                // 400ms 后允许点击
                 setTimeout(()=>{
                     vm.showlock = false;
                 },400);

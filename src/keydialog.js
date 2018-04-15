@@ -10,7 +10,7 @@ const KeyDialogConstructor = Vue.extend(KeyDialog);
 
 const keyDialog = {
     runtime:'pc',
-    keyDialogId:1201,
+    keyDialogId: 20171200,
     init(options, type) {
         keyDialog.keyDialogId += 1;
         const KeyDialogInstance = new KeyDialogConstructor({
@@ -50,6 +50,9 @@ export default {
     },
     setRunTime(runtime){
         keyDialog.runtime = runtime;
+    },
+    setLanguage(arr) {
+        
     },
     eventbus(){
         // 添加全局 event bus
