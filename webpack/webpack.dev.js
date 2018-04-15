@@ -2,9 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowser = require('open-browser-webpack-plugin');
-const webpackBaseConfig = require('./config');
-
-const port = 3003;
+const webpackBaseConfig = require('./webpack.base.config');
+const config = require('./config');
 
 webpackBaseConfig.module.rules.push({
     test: /\.css$/,
@@ -57,7 +56,7 @@ webpackBaseConfig.plugins.push(
         },
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new OpenBrowser({ url: `http://localhost:${port}/examples.html` }),
+    new OpenBrowser({ url: `http://localhost:${config.port}/examples.html` }),
 );
 
 module.exports = {
@@ -75,7 +74,7 @@ module.exports = {
         inline: true,
         compress: true,
         historyApiFallback: false,
+        port: config.port,
         host: '0.0.0.0',
-        port,
     },
 };

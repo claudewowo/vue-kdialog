@@ -78,7 +78,7 @@ this.$confirm({
 params    | type | description (参数解释) |
 --------- | -------- | -------- |
 _body_ | reserved words(不要覆盖) | control the position of the dialog (弹窗唤起位置class) |
-_rollfrom_ | String (default : 'center') | control the position of the dialog (弹窗唤起位置class) |
+_rollfrom_ | String ('center'/'top'/'bottom' default : 'center') | control the position of the dialog (弹窗唤起位置class) |
 title    | String | title of dialog (弹窗标题) |
 show  | Boolen | show or remove the dialog dom (显示或移除弹窗dom节点) |
 customClass | String | custom className for dialog (弹窗自定义className) |
@@ -95,8 +95,6 @@ cancelEvent | Object | custom cancel event bus name (自定义取消 event bus �
 disabled | Boolen | disable click the confirm (禁用确认按钮点击事件) |
 submiting | Boolen | submiting style for confirm button (确认按钮正在提交样式) |
 shadowClose | Boolen (default : true) | click shadow to close dialog (点击背景遮罩关闭弹窗) |
-toastName | String (default : 'bouncein') | custom className for toast (toast弹窗自定义动画class) |
-modalName | String (default : 'fadeIn') | custom transition className for dalog (弹窗自定义过渡动画class) |
 okText  | String | confirm button text (确认按钮文案) |
 cancelText  | String | cancel button text (取消按钮文案) |
 timer | Number | show toast time (显示toast时长) |
@@ -107,17 +105,18 @@ stopBodyScroll | Boolen(default: true) | stop Body Scroll (m版禁止body滚动)
 
 u can use it like this (你可以这样引入):
 
-1) with compressed css
+1) no css
 ```javascript
 import Vue from 'vue';
-import kdialog from 'vue-kdialog'
+import kdialog from 'vue-kdialog';
 Vue.use(kdialog);
 ```
 
-2) no css
+2) with postcss
 ```javascript
 import Vue from 'vue';
-import kdialog from 'vue-kdialog/src/keydialog.js';
+import kdialog from 'vue-kdialog';
+import kdialog from 'vue-kdialog/src/keydialog.css';
 Vue.use(kdialog);
 ```
 
@@ -177,7 +176,7 @@ vm.$alert({
 
 # API document (开发文档)
 
-https://keydone.github.io/vue-kdialog/dist/examples.html
+more to see: https://keydone.github.io/vue-kdialog/dist/examples.html
 
 ##0.7.12 new:
 * remove toastName, modalName
@@ -187,15 +186,8 @@ Add 'modal_enter', 'modal_leave' for animation;
 * remove 'stopBodyScroll' when _runtime == 'm';
 stop click event after tap;
 
-##0.7.6 new:
-toast can be html now!
-
 ##0.7.4 new:
 * stopBodyScroll: to stop body's scroll action while scrolling dialog content. (滚动弹窗内容阻止body滚动)
-
-##0.7.0 new:
-* stopBodyScroll: to stop body's scroll action while scrolling dialog content when _runtime == 'm'; (kdialog.setRunTime('m') 时滚动弹窗内容阻止body滚动)
-
 
 > To be continued !  ( It will be strong )
 

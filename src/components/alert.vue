@@ -58,6 +58,17 @@
       .btn_wrap.paddingB50
         span.btn(@click="alert_eventbus") alert with eventbus
 
+      h3 alert show from bottom
+      h4 code:
+      pre
+        code
+          | In your vue component:
+          hr
+          | {{case_6}}
+      h4 test:
+      .btn_wrap.paddingB50
+        span.btn(@click="confirm_from") alert show from bottom
+
 </template>
 
 <script>
@@ -157,6 +168,19 @@
                 },
             };
         \<\/script>`,
+        case_6: `
+        export default {
+            created:{
+                confirm_from(){
+                    this.$confirm({
+                        rollfrom:'bottom',
+                        title: 'show from bottom',
+                        content: 'confirm show from bottom. This is nice in mobile',
+                    });
+                }
+            }
+        };
+        `,
       }
     },
     created () {
@@ -218,11 +242,14 @@
           okEvent:'okEvent',
           cancelEvent:'cancelEvent',
         });
+      },
+      confirm_from(){
+        this.$confirm({
+          rollfrom:'bottom',
+          title: 'show from bottom',
+          content: 'confirm show from bottom. This is nice in mobile',
+        });
       }
     }
   };
 </script>
-
-<style lang="postcss">
-
-</style>

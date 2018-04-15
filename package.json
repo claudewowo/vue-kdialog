@@ -1,9 +1,9 @@
 {
   "name": "vue-kdialog",
-  "version": "0.7.11",
+  "version": "0.7.12",
   "description": "A Vue dialog component",
   "author": "keydone <k754708625@gmail.com>",
-  "main": "dist/keydialog.js",
+  "main": "src/keydialog.js",
   "scripts": {
     "start": "node webpack/build.js --0",
     "dev": "webpack-dev-server --config webpack/webpack.dev.js",

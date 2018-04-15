@@ -3,7 +3,7 @@
         //- loading
         i.icon-loading(v-if="_type=='loading'")
         //- shadow
-        .kdialog_bg(v-else, :class="_type === 'toast'?'toast_bg':''", @click="shadowHide", v-on:touchstart="touchStart", v-on:touchend="touchEnd($event, 2)")
+        .kdialog_bg(v-else, @click="shadowHide", v-on:touchstart="touchStart", v-on:touchend="touchEnd($event, 2)")
 
         .kdialog_wrap(v-if="_type!='loading'", :style="width?(`width:${ width };min-width:auto;`):''")
             //- toast

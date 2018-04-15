@@ -51,6 +51,9 @@ export default {
     setRunTime(runtime){
         keyDialog.runtime = runtime;
     },
+    setLanguage(arr) {
+        
+    },
     eventbus(){
         // 添加全局 event bus
         const EventBus = new Vue();

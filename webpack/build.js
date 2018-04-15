@@ -7,7 +7,7 @@ const CleanPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const webpackConfig = require('./config');
+const webpackConfig = require('./webpack.base.config');
 
 const params = process.env.npm_lifecycle_script.split(' ')[2];
 

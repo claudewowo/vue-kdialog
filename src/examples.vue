@@ -28,7 +28,6 @@
     html{overflow-x: hidden;}
     body{
         width:100%;
-        min-width: 1200px;
         min-height: 100%;
         &::-webkit-scrollbar {
             width: 4px;
@@ -52,6 +51,14 @@
     }
     input::-moz-placeholder{color: #ccc;}
     input::-webkit-input-placeholder{color: #ccc;}
+
+    .modal-enter-active, .modal-leave-active {
+    transition: opacity .3s ease, transform .3s linear;
+    }
+    .modal-leave-active {
+        opacity: 0;
+        transform:scale(0,0);
+    }
     .pr{position:relative;}
     .block{display: block;}
     .inlinetop{
@@ -104,7 +111,6 @@
     
     header{
         width:100%;
-        min-width: 1200px;
         background: cadetblue;
         margin-bottom: 20px;
     }
