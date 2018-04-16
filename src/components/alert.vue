@@ -41,7 +41,7 @@
       .btn_wrap.paddingB50
         span.btn(@click="alert_component") alert with component
 
-      h3 alert with event bus
+      h3 alert/confirm with event bus
       h4 code:
       pre
         code
@@ -56,9 +56,9 @@
           | {{case_5}}
       h4 test:
       .btn_wrap.paddingB50
-        span.btn(@click="alert_eventbus") alert with eventbus
+        span.btn(@click="confirm_eventbus") alert/confirm with eventbus
 
-      h3 alert show from bottom
+      h3 confirm show from bottom
       h4 code:
       pre
         code
@@ -67,7 +67,7 @@
           | {{case_6}}
       h4 test:
       .btn_wrap.paddingB50
-        span.btn(@click="confirm_from") alert show from bottom
+        span.btn(@click="confirm_from") confirm show from bottom
 
 </template>
 
@@ -174,6 +174,7 @@
                 confirm_from(){
                     this.$confirm({
                         rollfrom:'bottom',
+                        confirmText:'confirm',
                         title: 'show from bottom',
                         content: 'confirm show from bottom. This is nice in mobile',
                     });
@@ -234,7 +235,7 @@
           }
         });
       },
-      alert_eventbus(){
+      confirm_eventbus(){
         this.$confirm({
           title: 'test for event bus',
           content: 'click buttons bellow to show result.',
@@ -246,6 +247,7 @@
       confirm_from(){
         this.$confirm({
           rollfrom:'bottom',
+          confirmText:'confirm',
           title: 'show from bottom',
           content: 'confirm show from bottom. This is nice in mobile',
         });

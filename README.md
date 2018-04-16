@@ -95,7 +95,8 @@ cancelEvent | Object | custom cancel event bus name (自定义取消 event bus �
 disabled | Boolen | disable click the confirm (禁用确认按钮点击事件) |
 submiting | Boolen | submiting style for confirm button (确认按钮正在提交样式) |
 shadowClose | Boolen (default : true) | click shadow to close dialog (点击背景遮罩关闭弹窗) |
-okText  | String | confirm button text (确认按钮文案) |
+okText  | String | confirm button text for alert (alert确认按钮文案) |
+confirmText  | String | confirm button text for confirm (confirm确认按钮文案) |
 cancelText  | String | cancel button text (取消按钮文案) |
 timer | Number | show toast time (显示toast时长) |
 msg | Number | show toast msg (显示toast消息) |
@@ -116,7 +117,7 @@ Vue.use(kdialog);
 ```javascript
 import Vue from 'vue';
 import kdialog from 'vue-kdialog';
-import kdialog from 'vue-kdialog/src/keydialog.css';
+import kdialog from 'vue-kdialog/src/keydialog_pc.css';
 Vue.use(kdialog);
 ```
 
@@ -177,6 +178,16 @@ vm.$alert({
 # API document (开发文档)
 
 more to see: https://keydone.github.io/vue-kdialog/dist/examples.html
+
+##0.7.13 new:
+* Add set language: 
+kdialog.setLanguage('en'); // only can be 'en'/'zh-cn'; default: 'zh-cn';
+* or
+kdialog.setLanguage({
+  ok: 'OK',
+  confirm: 'Confirm',
+  cancel: 'cancel'
+});
 
 ##0.7.12 new:
 * remove toastName, modalName

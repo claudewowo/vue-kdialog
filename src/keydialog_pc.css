@@ -85,7 +85,7 @@
     position:relative;
 }
 
-.kdialog_title{margin-left: -12px;}
+.kdialog_title{margin-left: -10px;}
 
 
 .kdialog_close{
@@ -117,7 +117,7 @@
 }
 
 .kdialog_footer{
-    padding:10px 30px 20px;
+    padding:10px 30px 15px;
     text-align: center;
     font-size: 0;
     a{display: inline-block;
