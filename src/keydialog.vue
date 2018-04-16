@@ -20,8 +20,8 @@
                 .kdialog_content(v-else, v-html="content")
                 //- footer
                 .kdialog_footer(:class="_type + '_footer'")
-                    a.confirm(href="javascript:;", @click="confirmPop", v-on:touchstart="touchStart", v-on:touchend="touchEnd($event, 1)", :class="disabled?'disabled':(submiting?'submiting':'')") {{okText || "Confirm"}}
-                    a.cancel(href="javascript:;", @click="closePop", v-on:touchstart="touchStart", v-on:touchend="touchEnd", v-if="_type === 'confirm'") {{cancelText || "Cancel"}}
+                    a.confirm(href="javascript:;", @click="confirmPop", v-on:touchstart="touchStart", v-on:touchend="touchEnd($event, 1)", :class="disabled?'disabled':(submiting?'submiting':'')") {{_type === 'confirm'? confirmText: okText}}
+                    a.cancel(href="javascript:;", @click="closePop", v-on:touchstart="touchStart", v-on:touchend="touchEnd", v-if="_type === 'confirm'") {{cancelText}}
 
 </template>
 
@@ -59,11 +59,74 @@
                 shadowClose: true,                      // 点击遮罩是否可关闭弹窗
                 modal_enter: '',                        // 入场动画 class
                 modal_leave: '',                        // 离场动画 class
-                okText: '',                             // 确认按钮文案
+                okText: '',                             // alert确认按钮文案
+                confirmText: '',                        // confirm 确认按钮文案
                 cancelText: '',                         // 取消按钮文案
                 timer: 2500,                            // toast 默认显示时长
                 msg: '',                                // toast 弹窗信息
             }
+        },
+        mounted () {
+            const vm = this;
+            const doc = document;
+            const lang = vm._language;
+            const okText = vm.okText;
+            const confirmText = vm.confirmText;
+            const cancelText = vm.cancelText;
+            if(Object.prototype.toString.call(lang.default) === '[object String]'){
+                vm.okText = okText || lang[lang.default].ok;
+                vm.confirmText = confirmText || lang[lang.default].confirm;
+                vm.cancelText = cancelText || lang[lang.default].cancel;
+            }else{
+                vm.okText = okText || lang.default.ok;
+                vm.confirmText = confirmText || lang.default.confirm;
+                vm.cancelText = cancelText || lang.default.cancel;
+            }
+
+            this.$nextTick(()=>{
+                vm.body.el = doc.documentElement;
+                if(vm.stopBodyScroll && !vm.body.el.scrollbar){
+                    const win = window;
+                    if(vm._runtime === 'runon_pc'){
+                        vm.body.el.originMarginRight = vm.body.el.style.marginRight;
+                        vm.body.el.scrollbarWidth = win.innerWidth - doc.body.clientWidth; // 滚动条宽度
+                        vm.body.el.style.marginRight = (vm.body.el.originMarginRight + vm.body.el.scrollbarWidth) + 'px';
+                        vm.body.el.style.overflow = 'hidden';
+                    }
+                    vm.body.el.scrollbar = true;
+                };
+                
+                vm.rollfrom = 'from'+ (vm.rollfrom || 'center');
+
+                vm.modal_enter = vm.modal_leave = '';
+                setTimeout(() => {
+                    vm.modal_enter = 'modal_enter';
+                }, 66);
+
+                if(vm._type === 'toast'){
+                    /* toast 弹窗 */
+                    if(vm.timer < 500) vm.timer = 500;
+                    setTimeout(() => {
+                        vm.modal_enter = '';
+                        vm.modal_leave = 'modal_leave';
+                        vm.showlock = false;
+                    }, vm.timer-200);
+                    setTimeout(() => {
+                        if(vm.ok){
+                            return vm.ok(vm);
+                        }
+                        const dialogs = doc.querySelectorAll('.kdialog').length;
+                        // 允许body滚动
+                        vm.bodyScroll(dialogs);
+                        vm.show = false;
+                    }, vm.timer);
+                }else{
+                    // 400ms 后允许点击
+                    setTimeout(()=>{
+                        vm.showlock = false;
+                    },400);
+                }
+            });
         },
         methods: {
             touchStart(){
@@ -148,51 +211,5 @@
                 }
             }
         },
-        mounted () {
-            const vm = this;
-            const doc = document;
-            vm.body.el = doc.documentElement;
-            if(vm.stopBodyScroll && !vm.body.el.scrollbar){
-                const win = window;
-                if(vm._runtime === 'runon_pc'){
-                    vm.body.el.originMarginRight = vm.body.el.style.marginRight;
-                    vm.body.el.scrollbarWidth = win.innerWidth - doc.body.clientWidth; // 滚动条宽度
-                    vm.body.el.style.marginRight = (vm.body.el.originMarginRight + vm.body.el.scrollbarWidth) + 'px';
-                    vm.body.el.style.overflow = 'hidden';
-                }
-                vm.body.el.scrollbar = true;
-            };
-            
-            vm.rollfrom = 'from'+ (vm.rollfrom || 'center');
-
-            vm.modal_enter = vm.modal_leave = '';
-            setTimeout(() => {
-                vm.modal_enter = 'modal_enter';
-            }, 66);
-
-            if(vm._type === 'toast'){
-                /* toast 弹窗 */
-                if(vm.timer < 500) vm.timer = 500;
-                setTimeout(() => {
-                    vm.modal_enter = '';
-                    vm.modal_leave = 'modal_leave';
-		            vm.showlock = false;
-                }, vm.timer-200);
-                setTimeout(() => {
-                    if(vm.ok){
-                        return vm.ok(vm);
-                    }
-                    const dialogs = doc.querySelectorAll('.kdialog').length;
-                    // 允许body滚动
-                    vm.bodyScroll(dialogs);
-                    vm.show = false;
-                }, vm.timer);
-            }else{
-                // 400ms 后允许点击
-                setTimeout(()=>{
-                    vm.showlock = false;
-                },400);
-            }
-        }
     }
 </script>

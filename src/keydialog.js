@@ -4,12 +4,24 @@
 
 import Vue from 'vue';
 import KeyDialog from './keydialog.vue';
-// import './keydialog_pc.css';
 
 const KeyDialogConstructor = Vue.extend(KeyDialog);
 
 const keyDialog = {
     runtime:'pc',
+    language: {
+        default: 'zh-cn',
+        'zh-cn': {
+            ok: '确定',
+            confirm: '确定',
+            cancel: '取消'
+        },
+        'en': {
+            ok: 'OK',
+            confirm: 'Confirm',
+            cancel:'Cancel'
+        }
+    },
     keyDialogId: 20171200,
     init(options, type) {
         keyDialog.keyDialogId += 1;
@@ -20,6 +32,7 @@ const keyDialog = {
         const id = `kDialog_${keyDialog.keyDialogId}`;
         KeyDialogInstance.id = id;
         KeyDialogInstance._type = type;
+        KeyDialogInstance._language = keyDialog.language;
         KeyDialogInstance._runtime = `runon_${keyDialog.runtime}`;
         KeyDialogInstance.vm = KeyDialogInstance.$mount(); // 挂载但是并未插入dom，是个完整的Vue实例
         KeyDialogInstance.dom = KeyDialogInstance.vm.$el;
@@ -51,8 +64,8 @@ export default {
     setRunTime(runtime){
         keyDialog.runtime = runtime;
     },
-    setLanguage(arr) {
-        
+    setLanguage(defaultLang) {
+        keyDialog.language.default = defaultLang;
     },
     eventbus(){
         // 添加全局 event bus

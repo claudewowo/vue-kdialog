@@ -16,7 +16,8 @@
           | import 'vue-kdialog/src/keydialog_pc.css'; // css for PC
           | // import 'vue-kdialog/src/keydialog_m.css'; // css for mobile
           | Vue.use(kdialog);
-      h3 3, use event bus
+      h2 Global function
+      h3 1, event bus
       pre
         code
           | import Vue from 'vue';
@@ -24,6 +25,20 @@
           | import 'vue-kdialog/src/keydialog_pc.css'; // css for PC
           | Vue.use(kdialog);
           | kdialog.eventbus(); // init the eventbus, the bus will be mounted to Vue prototype (全局使用eventbus事件，并挂载到vue原型上)
+      h3 2, set language
+      pre
+        code
+          | import Vue from 'vue';
+          | import kdialog from 'vue-kdialog'; // only nodeElement
+          | import 'vue-kdialog/src/keydialog_pc.css'; // css for PC
+          | Vue.use(kdialog);
+          | kdialog.setLanguage('en'); // only can be 'en'/'zh-cn'
+          | /* or
+          | kdialog.setLanguage({
+          |    ok: 'OK',
+          |    confirm: 'Confirm',
+          |    cancel: 'cancel'
+          | }); */
 
 </template>
 

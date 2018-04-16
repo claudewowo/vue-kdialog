@@ -127,7 +127,7 @@
     }
 
     .nav_tree{
-        width: 120px;
+        width: 125px;
         position: absolute;
         top:0;left:0;
         line-height:32px;
