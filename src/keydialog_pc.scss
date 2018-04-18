@@ -1,0 +1,215 @@
+
+/* 
+*   弹窗  
+*/
+
+@keyframes spin {
+    100%{ transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+.kdialog, .kdialog_bg{
+    position: fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index:10;
+}
+
+.kdialog{
+    opacity:0;
+    transition-duration:.2s;
+    .icon-loading {
+      width: 66px;
+      height:66px;
+      background: #fff;
+      border:1px solid #eee;
+      box-shadow: 0 0 2px 0 #555;
+      border-radius: 6px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+}
+
+.kdialog {
+    .icon-loading:before{
+        content:'';
+        width: 26px;
+        height: 26px;
+        display:block;
+        margin:18px auto;
+        border-radius: 50%;
+        border: 3px solid rgb(0,0,0);
+        border-left-color: transparent;
+        border-right-color: transparent;
+        animation: spin 575ms infinite linear;
+    }
+}
+
+.kdialog_bg{
+    background: rgba(0, 0, 0, .5);
+}
+
+.modal_toast{
+    .kdialog_bg{background:none;}
+}
+
+.kdialog_wrap{
+    position: absolute;
+    top:50%; left:50%;
+    z-index: 12;
+    transform: translateX(-50%) translateY(-50%) translateZ(0);
+}
+
+.kdialog_msg, .kdialog_box{
+    border-radius: 4px;
+    transform:scale(.5);
+}
+
+.kdialog_msg{
+    color: #fff;
+    padding:6px 20px;
+    background: rgba(0,0,0,.8);
+}
+
+.kdialog_box{background: #fff;}
+
+.kdialog_header{
+    color: #333;
+    font-size: 16px;
+    border-bottom:1px solid #eee;
+    padding: 7px 32px;
+    line-height:30px;
+    position:relative;
+}
+
+.kdialog_title{margin-left: -10px;}
+
+
+.kdialog_close{
+    position: absolute;
+    right:5px;top:5px;
+    width: 26px;
+    height:26px;
+    cursor:pointer;
+    transition-duration:.3s;
+    &:hover{transform: rotate(180deg);}
+    &:before, &:after{
+        content: '';
+        height:2px;
+        width:18px;
+        position:absolute;
+        background: #333;
+        border-radius:2px;
+        top:12px;right:4px;
+    }
+    &:before{transform: rotate(45deg);}
+    &:after{transform: rotate(-45deg);}
+}
+
+.kdialog_content{
+    padding:10px 20px 0;
+    font-size: 14px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.kdialog_footer{
+    padding:10px 30px 15px;
+    text-align: center;
+    font-size: 0;
+    a{display: inline-block;
+        vertical-align:top;
+        white-space: nowrap;
+        font-size:14px;
+        height: 30px;
+        line-height: 30px;
+        background: #FF8A00;
+        border-radius: 4px;
+        padding:0 20px;
+        margin:0 10px;
+        color: #fff;
+        text-decoration: none;
+        &:hover{background-color: #e67c00;}
+    }
+    .cancel{
+        background: #CCC;
+        &:hover{background:#bfbfbf;}
+    }
+}
+
+@keyframes progress{
+    from  { background-position: 0 0; }
+    to    { background-position: 50px 0; }
+}
+
+.confirm{
+    &.submiting{
+        animation: progress 2s linear infinite;
+        background-color: #FF8A00 !important;
+        background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent) !important;
+        background-size: 50px 50px !important;
+    }
+    &.disabled{cursor: not-allowed;
+        background: #CCC !important;
+    }
+}
+
+.modal_enter, .modal_leave{
+    .kdialog_msg, .kdialog_box{
+        transition: opacity .3s ease, transform .3s ease-in;
+        transition-timing-function:cubic-bezier(0.47, 2.02, 0.31, -0.3);
+    }
+}
+
+.modal_enter{
+    opacity: 1;
+    .kdialog_msg, .kdialog_box{transform: scale(1);}
+}
+
+.modal_leave{
+    opacity: 0;
+    .kdialog_msg, .kdialog_box{transform: scale(.7);}
+}
+
+/*
+* rollfrom
+*/
+
+.frombottom{
+    .kdialog_wrap{
+        top:100%;
+    }
+    &.modal_enter{
+        .kdialog_wrap{
+            top: 50%;
+            transition-duration: .3s;
+        }
+    }
+    &.modal_leave{
+        .kdialog_wrap{
+            top: 100%;
+            transition-duration: .3s;
+        }
+    }
+}
+
+.fromtop{
+    .kdialog_wrap{
+        top:-100%;
+    }
+    &.modal_enter{
+        .kdialog_wrap{
+            top: 50%;
+            transition-duration: .3s;
+        }
+    }
+    &.modal_leave{
+        .kdialog_wrap{
+            top: -100%;
+            transition-duration: .3s;
+        }
+    }
+}

@@ -6,7 +6,8 @@
       pre
         code
           | import Vue from 'vue';
-          | import kdialog from 'vue-kdialog';
+          | import kdialog from 'vue-kdialog'; // transformed by pilyfill-babel
+          | // or import kdialog from 'vue-kdialog/src/keydialog.js'; // no transformed
           | Vue.use(kdialog);
       h3 2, with css
       pre
@@ -14,7 +15,6 @@
           | import Vue from 'vue';
           | import kdialog from 'vue-kdialog'; // only nodeElement
           | import 'vue-kdialog/src/keydialog_pc.css'; // css for PC
-          | // import 'vue-kdialog/src/keydialog_m.css'; // css for mobile
           | Vue.use(kdialog);
       h2 Global function
       h3 1, event bus
