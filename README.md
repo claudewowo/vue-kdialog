@@ -179,7 +179,9 @@ vm.$alert({
 
 more to see: https://keydone.github.io/vue-kdialog/dist/examples.html
 
-##0.7.13 new:
+##0.7.14 new:
+* import kdialog from 'vue-kdialog', but no css;
+* import 'vue-kdialog/src/keydialog_pc.css'; // browsers support: ["last 20 versions", "ie >=9"];(or scss)
 * Add set language: 
 kdialog.setLanguage('en'); // only can be 'en'/'zh-cn'; default: 'zh-cn';
 * or
@@ -189,11 +191,8 @@ kdialog.setLanguage({
   cancel: 'cancel'
 });
 
-##0.7.12 new:
 * remove toastName, modalName
 Add 'modal_enter', 'modal_leave' for animation;
-
-##0.7.11 new:
 * remove 'stopBodyScroll' when _runtime == 'm';
 stop click event after tap;
 

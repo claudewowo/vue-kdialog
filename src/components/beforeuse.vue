@@ -14,7 +14,6 @@
           | import Vue from 'vue';
           | import kdialog from 'vue-kdialog'; // only nodeElement
           | import 'vue-kdialog/src/keydialog_pc.css'; // css for PC
-          | // import 'vue-kdialog/src/keydialog_m.css'; // css for mobile
           | Vue.use(kdialog);
       h2 Global function
       h3 1, event bus
