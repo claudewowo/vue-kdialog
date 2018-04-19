@@ -180,9 +180,8 @@ vm.$alert({
 more to see: https://keydone.github.io/vue-kdialog/dist/examples.html
 
 ##0.7.14 new:
-* import kdialog from 'vue-kdialog' directly with compressed js, but no css;
-* import 'vue-kdialog/src/keydialog_pc.css'; or scss
-* compressed js & css's browsers support: ["last 20 versions", "ie >=9"];
+* import kdialog from 'vue-kdialog', but no css;
+* import 'vue-kdialog/src/keydialog_pc.css'; // browsers support: ["last 20 versions", "ie >=9"];(or scss)
 * Add set language: 
 kdialog.setLanguage('en'); // only can be 'en'/'zh-cn'; default: 'zh-cn';
 * or

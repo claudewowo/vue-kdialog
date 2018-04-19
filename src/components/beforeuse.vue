@@ -6,8 +6,7 @@
       pre
         code
           | import Vue from 'vue';
-          | import kdialog from 'vue-kdialog'; // transformed by pilyfill-babel
-          | // or import kdialog from 'vue-kdialog/src/keydialog.js'; // no transformed
+          | import kdialog from 'vue-kdialog';
           | Vue.use(kdialog);
       h3 2, with css
       pre
