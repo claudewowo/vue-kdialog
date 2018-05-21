@@ -1,6 +1,6 @@
 {
   "name": "vue-kdialog",
-  "version": "0.7.15",
+  "version": "1.0.0",
   "description": "A Vue dialog component",
   "author": "keydone <k754708625@gmail.com>",
   "main": "src/keydialog.js",
