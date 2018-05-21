@@ -14,14 +14,22 @@
 </template>
 
 <script>
+    // import remoteLoad from './utils/lazyscript';
 
     export default {
-        data () {
+        data() {
             return {
-                transitionName:'slide-left',
-            }
+                transitionName: 'slide-left',
+            };
         },
-    }
+        mounted() {
+            /* setTimeout(() => {
+                remoteLoad('/src/utils/lazy.js').then(() => {
+                    console.log(window.VUE);
+                });
+            }, 1000); */
+        }
+    };
 </script>
 
 <style lang="postcss">

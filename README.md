@@ -5,6 +5,8 @@
 
 ![](https://raw.githubusercontent.com/keydone/vue-kdialog/master/screenshot/confirm.png)
 
+<img src="https://raw.githubusercontent.com/keydone/vue-kdialog/master/screenshot/small.gif" width="400px" />
+
 ## Usage (使用)
 
 1, import kdialog component (导入 kdialog 组件);
@@ -100,7 +102,7 @@ confirmText  | String | confirm button text for confirm (confirm确认按钮文�
 cancelText  | String | cancel button text (取消按钮文案) |
 timer | Number | show toast time (显示toast时长) |
 msg | Number | show toast msg (显示toast消息) |
-stopBodyScroll | Boolen(default: true) | stop Body Scroll (m版禁止body滚动) |
+stopBodyScroll | Boolen(default: true) | stop Body Scroll, support pc & m (禁止body跟随弹窗内容区域滚动而滚动的默认行为, 同样支持移动端) |
 
 > By the way:
 
@@ -179,22 +181,20 @@ vm.$alert({
 
 more to see: https://keydone.github.io/vue-kdialog/dist/examples.html
 
+##1.0.0 new:
+* stopBodyScroll for mobile is back since this version.
+
+In pc, u just need add max-height, overflow-y:auto for dialog's content;
+
+But, in mobile, u must put scroll content in 'kdialog_scroll_wrap', and add max-height :
+
 ##0.7.14 new:
 * import kdialog from 'vue-kdialog', but no css;
 * import 'vue-kdialog/src/keydialog_pc.css'; // browsers support: ["last 20 versions", "ie >=9"];(or scss)
-* Add set language: 
-kdialog.setLanguage('en'); // only can be 'en'/'zh-cn'; default: 'zh-cn';
-* or
-kdialog.setLanguage({
-  ok: 'OK',
-  confirm: 'Confirm',
-  cancel: 'cancel'
-});
+* Add set language: kdialog.setLanguage('en'); // only can be 'en'/'zh-cn'; default: 'zh-cn';
+* or kdialog.setLanguage({ ok: 'OK', confirm: 'Confirm', cancel: 'cancel' });
 
-* remove toastName, modalName
-Add 'modal_enter', 'modal_leave' for animation;
-* remove 'stopBodyScroll' when _runtime == 'm';
-stop click event after tap;
+* remove toastName & modalName, Add 'modal_enter', 'modal_leave' for animation;
 
 ##0.7.4 new:
 * stopBodyScroll: to stop body's scroll action while scrolling dialog content. (滚动弹窗内容阻止body滚动)

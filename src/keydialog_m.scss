@@ -1,0 +1,128 @@
+@import './keydialog_public.css';
+/* 
+*   弹窗  
+*/
+
+/* .kdialog{
+    .icon-loading {
+      width: 66px;
+      height:66px;
+      border-radius: 6px;
+      &:before{
+        width: 26px;
+        height: 26px;
+        margin:18px auto;
+      }
+    }
+} */
+
+.kdialog_msg, .kdialog_box{
+    border-radius: rem(6);
+    overflow: hidden;
+}
+
+.kdialog_msg{
+    @mixin font 28;
+    text-align: center;
+    padding: rem(30);
+    min-width: rem(525);
+    max-width: rem(700);
+    line-height: rem(36);
+}
+
+.kdialog_header{
+    margin-bottom:rem(20);
+    padding: rem(25) rem(40);
+    text-align: center;
+    line-height: rem(34);
+    color: var(--mainC);
+    @mixin font 30;
+}
+
+.kdialog_close{
+    right:rem(20);
+    top: rem(17);
+    width: rem(45);
+    height: rem(45);
+    &:before, &:after{
+        height: rem(2);
+        width: rem(34);
+        top: rem(22);
+        right: rem(6);
+    }
+}
+
+.kdialog_content{
+    padding: 0 rem(30);
+    min-height: 1rem;
+}
+
+.kdialog_footer {
+    a {@mixin font 30;
+        width: 50%;
+        height: rem(90);
+        line-height: rem(90);
+        padding: 0 rem(30);
+        text-align: center;
+        color: #fff;
+    }
+    &.confirm_footer{
+        margin-top:rem(20);
+        border-top:1px solid #eee;
+        a{background: #fff;
+            color: #007aff;
+        }
+        .cancel{border-left:1px solid #eee;}
+    }
+    
+}
+
+@keyframes progress{
+    from  { background-position: 0 0; }
+    to    { background-position: rem(120) 0; }
+}
+
+.confirm{
+    &.submiting{
+        background-size: rem(120) rem(120) !important;
+    }
+}
+
+/*
+* rollfrom
+*/
+
+.frombottom{    
+    .kdialog_close {
+        &:before, &:after {
+            height: rem(2);
+            width: rem(34);
+            top: rem(22);
+            right: rem(6);
+            border-radius: rem(2);
+        }
+    }
+    .kdialog_wrap{
+        width:100%;
+        top:auto;
+        bottom:0;
+        transform: translate(-50%, 10%) translateZ(0);
+    }
+    &.modal_enter{
+        .kdialog_wrap{
+            transition-delay: .1s;
+            transform: translate(-50%);
+        }
+    }
+    &.btn-right {
+        .kdialog_footer {        
+            a {position: absolute;
+                right: 0;
+                bottom: 0;
+                width: rem(200);
+            }
+        }
+    }
+}
+
+
