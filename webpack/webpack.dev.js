@@ -74,6 +74,7 @@ module.exports = {
         inline: true,
         compress: true,
         historyApiFallback: false,
+        overlay: { warnings: true, errors: true },
         port: config.port,
         host: '0.0.0.0',
     },

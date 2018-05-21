@@ -24,10 +24,16 @@ module.exports = {
     },
     module: {
         rules: [{
-            test: /\.js$/,
+            test: /\.(js|vue)$/,
             enforce: 'pre',
             exclude: /node_modules/,
-            use: ['babel-loader'],
+            /* use: [{
+                loader: 'eslint-loader',
+                options: {
+                    formatter: require('eslint-friendly-formatter'),
+                    emitError: true,
+                }
+            }], */
         }, {
             test: /\.vue$/,
             use: {
@@ -77,4 +83,7 @@ module.exports = {
         maxAssetSize: 5000000,
         maxEntrypointSize: 10000000,
     },
+    externals: {
+        Vue: 'Vue'
+    }
 };

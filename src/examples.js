@@ -5,7 +5,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './examples.vue';
-import KeyDialog from './keydialog.js';
+import KeyDialog from './keydialog';
 import './keydialog_pc.css';
 
 Vue.config.devtools = true; // 开启浏览器 devtools 调试

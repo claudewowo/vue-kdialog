@@ -1,6 +1,6 @@
 /**
  * Created by keydone on 2017/05/01.
-**/
+* */
 
 import Vue from 'vue';
 import KeyDialog from './keydialog.vue';
@@ -8,7 +8,7 @@ import KeyDialog from './keydialog.vue';
 const KeyDialogConstructor = Vue.extend(KeyDialog);
 
 const keyDialog = {
-    runtime:'pc',
+    runtime: 'pc',
     language: {
         default: 'zh-cn',
         'zh-cn': {
@@ -16,13 +16,13 @@ const keyDialog = {
             confirm: '确定',
             cancel: '取消'
         },
-        'en': {
+        en: {
             ok: 'OK',
             confirm: 'Confirm',
-            cancel:'Cancel'
+            cancel: 'Cancel'
         }
     },
-    keyDialogId: 20171200,
+    keyDialogId: 171200,
     init(options, type) {
         keyDialog.keyDialogId += 1;
         const KeyDialogInstance = new KeyDialogConstructor({
@@ -31,12 +31,12 @@ const keyDialog = {
 
         const id = `kDialog_${keyDialog.keyDialogId}`;
         KeyDialogInstance.id = id;
-        KeyDialogInstance._type = type;
-        KeyDialogInstance._language = keyDialog.language;
-        KeyDialogInstance._runtime = `runon_${keyDialog.runtime}`;
+        KeyDialogInstance._type = type;                      // eslint-disable-line
+        KeyDialogInstance._language = keyDialog.language;    // eslint-disable-line
+        KeyDialogInstance._runtime = `runon_${keyDialog.runtime}`; // eslint-disable-line
         KeyDialogInstance.vm = KeyDialogInstance.$mount(); // 挂载但是并未插入dom，是个完整的Vue实例
         KeyDialogInstance.dom = KeyDialogInstance.vm.$el;
-        document.body.appendChild(KeyDialogInstance.dom);  // 将dom插入body
+        document.body.appendChild(KeyDialogInstance.dom); // 将dom插入body
         KeyDialogInstance.dom.style.zIndex = keyDialog.keyDialogId;
         return KeyDialogInstance.vm;
     },
@@ -61,13 +61,13 @@ export default {
         Vue.prototype.$loading = keyDialog.loading;
         Vue.prototype.$confirm = keyDialog.confirm;
     },
-    setRunTime(runtime){
+    setRunTime(runtime) {
         keyDialog.runtime = runtime;
     },
     setLanguage(defaultLang) {
         keyDialog.language.default = defaultLang;
     },
-    eventbus(){
+    eventbus() {
         // 添加全局 event bus
         const EventBus = new Vue();
 

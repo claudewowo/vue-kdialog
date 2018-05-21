@@ -1,8 +1,8 @@
-npm ·¢²¼Á÷³Ì£º
+npm å‘å¸ƒæµç¨‹ï¼š
 
-npm init (name, mainÈë¿Ú)
+npm init (name, mainå…¥å£)
 
-mainÈë¿Ú export default {}
+mainå…¥å£ export default {}
 
 npm login
 
