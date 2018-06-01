@@ -287,6 +287,8 @@
               });
           },
           confirm_eventbus() {
+              this.$bus.$off('okEvent');
+              this.$bus.$off('cancelEvent');
               this.$confirm({
                   title: 'test for event bus',
                   content: 'click buttons bellow to show result.',

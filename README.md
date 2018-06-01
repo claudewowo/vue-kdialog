@@ -136,6 +136,7 @@ kdialog.eventbus();
 
 // when u need:
 const this = vm;
+vm.$bus.$off('changeAct'); // !!!!off event first!!!! of u will get more emit
 vm.$confirm({
 	title: '<h2>title with html</h2>'
 	okEvent: 'changeAct',  // emit ok event, click the ok, it will emit 'changeAct'
@@ -153,9 +154,6 @@ vm.$bus.$on('changeAct', (data)=>{
 	//(执行close方法后，当前弹窗实例和相应 event bus 事件会被自动销毁。所以请给不同的弹窗使用不同的 event 事件名称)
 });
 
-vm.$bus.$off('event name', (data)=>{});
-// Remove the event bus manually, but u had better understand the principles of event bus deeply.
-// (你也可以手动移除事件监听, 仅当你熟悉 event bus 的原理时)
 ```
 
 ② callback
@@ -186,7 +184,7 @@ more to see: https://keydone.github.io/vue-kdialog/dist/examples.html
 
 In pc, u just need add max-height, overflow-y:auto for dialog's content;
 
-But, in mobile, u must put scroll content in 'kdialog_scroll_wrap', and add max-height :
+But, in mobile, u must put scroll content in 'kdialog_scroll_wrap', and add max-height;
 
 ##0.7.14 new:
 * import kdialog from 'vue-kdialog', but no css;
