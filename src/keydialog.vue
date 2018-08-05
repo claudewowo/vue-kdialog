@@ -5,7 +5,7 @@
         //- shadow
         .kdialog_bg(v-else, @click.stop.prevent="shadowHide('click')", @touchend.stop.prevent="touchEnd($event, 2)")
 
-        .kdialog_wrap(v-if="_type!='loading'", :style="width?(`width:${ width };min-width:auto;`):''", @click.stop.prevent="")
+        .kdialog_wrap(v-if="_type!='loading'", :style="width?(`width:${ width };min-width:auto;`):''", @click.stop="")
             //- toast
             .kdialog_msg(v-if="_type === 'toast'", v-html="msg")
             //- content box
