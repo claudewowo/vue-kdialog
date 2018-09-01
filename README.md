@@ -179,6 +179,9 @@ vm.$alert({
 
 more to see: https://keydone.github.io/vue-kdialog/dist/examples.html
 
+##1.0.3 new:
+* fix: bug in IE10.
+
 ##1.0.0 new:
 * stopBodyScroll for mobile is back since this version.
 

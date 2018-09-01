@@ -277,9 +277,13 @@
                 vm.modal_leave = 'modal_leave';
     
                 setTimeout(() => {
-                    const dialogs = document.querySelectorAll('.kdialog').length;
                     vm.show = false;
+                    const dialogs = document.querySelectorAll('.kdialog').length;
                     setTimeout(() => {
+                        const leftDOM = document.getElementById(`kDialog_${vm.id}`);
+                        if (leftDOM) {
+                            document.body.remove(leftDOM);
+                        }
                         // 允许body滚动
                         vm.bodyScroll(dialogs);
                         /* // ok event
